@@ -3,7 +3,7 @@
 include 'Conexion.php';
 $upload_path='fotos/';
 
-$upload_url = 'http://localhost/Inventarios/'.$upload_path;
+$upload_url = 'http://localhost/Incidencias/'.$upload_path;
 
 $respuesta = array();
 
