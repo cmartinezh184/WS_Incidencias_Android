@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     try{
         move_uploaded_file($_FILES["foto"]["tmp_name"], $path_foto);
-        $query = "UPDATE TABLE incidencia (usuario_id, descripcion, latitud, longitud, url_foto) VALUES('{$usuario_id}', '{$descripcion}', '{$latitud}', '{$longitud}', '{$url_foto}')";
+        $query = "UPDATE TABLE incidencia (descripcion, latitud, longitud, url_foto) VALUES('{$descripcion}', '{$latitud}', '{$longitud}', '{$url_foto}')";
 
         if(mysqli_query($conexion, $query)){
             echo json_encode("Incidencia registrada");
