@@ -1,29 +1,25 @@
-<?php
-   include("Conexion.php");
-   session_start();
-   
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-      
-      $myusername = mysqli_real_escape_string($db,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
-      
-      $sql = "SELECT id FROM admin WHERE username = '$myusername' and passcode = '$mypassword'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['active'];
-      
-      $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count == 1) {
-         session_register("myusername");
-         $_SESSION['login_user'] = $myusername;
-         
-         header("location: welcome.php");
-      }else {
-         $error = "Your Login Name or Password is invalid";
-      }
-   }
+<?PHP
+
+include "Conexion.php";
+
+$correo = $_POST["correo"];
+$contrasenia = $_POST["contrasenia"];
+
+if(isset($_GET["correo"], $_GET["contrasenia"])) {
+    $correo = $_GET["correo"];
+    $contrasenia = $_GET["contrasenia"];
+
+    $consulta = "SELECT correo FROM persona WHERE correo = '{$correo}' AND contrasenia = '{$contrasenia}'";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if(!$resultado){
+        mysqli_close($conexion);
+        echo json_encode("Bienvenido");
+    } else {
+        echo json_encode("Credenciales no validos");
+    }
+} else {
+    echo json_encode("Debe llenar todos los campos");
+}
+
 ?>

@@ -2,7 +2,7 @@
 
 include 'Conexion.php';
 
-$consulta = "SELECT * FROM articulo";
+$consulta = "SELECT * FROM incidencia";
 $resultado = mysqli_query($conexion, $consulta);
 
 $filas = array();
